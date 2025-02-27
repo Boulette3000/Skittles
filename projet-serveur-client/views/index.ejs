@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MySkittles</title>
+    <link rel="icon" href="/Girafe.png" type="image/png">
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+
+    <h1>Bienvenue sur notre boutique MySkittles, 100 % sécurisé, 100 % qualité</h1>
+
+    <!-- Boutons pour ajouter des articles prédéfinis -->
+    <div class="predefined-articles">
+        <form action="/init/red" method="POST" class="predefined-article-form test">
+            <img src="/rouge.png" alt="Skittle rouge">
+            <button type="submit">Ajouter Skittle rouge</button>
+            <select name="qteArticle">
+                <option value="5">5 skittles</option>
+                <option value="10">10 skittles</option>
+                <option value="15">15 skittles</option>
+            </select>
+            <select name="intensite">
+                <option value="1">1 mg</option>
+                <option value="3">3 mg</option>
+                <option value="5">5 mg</option>
+            </select>
+        </form>
+        <form action="/init/green" method="POST" class="predefined-article-form test">
+            <img src="/vert.png" alt="Skittle vert">
+            <button type="submit">Ajouter Skittle vert</button>
+            <select name="qteArticle">
+                <option value="5">5 skittles</option>
+                <option value="10">10 skittles</option>
+                <option value="15">15 skittles</option>
+            </select>
+            <select name="intensite">
+                <option value="1">1 mg</option>
+                <option value="3">3 mg</option>
+                <option value="5">5 mg</option>
+            </select>
+        </form>
+        <form action="/init/purple" method="POST" class="predefined-article-form test">
+            <img src="/violet.png" alt="Skittle violet">
+            <button type="submit">Ajouter Skittle violet</button>
+            <select name="qteArticle">
+                <option value="5">5 skittles</option>
+                <option value="10">10 skittles</option>
+                <option value="15">15 skittles</option>
+            </select>
+            <select name="intensite">
+                <option value="1">1 mg</option>
+                <option value="3">3 mg</option>
+                <option value="5">5 mg</option>
+            </select>
+        </form>
+    </div>
+
+    <!-- Panier en haut à droite -->
+    <div id="cart-icon" onclick="toggleCart()">
+        🛒
+        <span id="cart-count" style="display: none;">0</span>
+    </div>
+    <div id="cart">
+        <h2>Panier</h2>
+        <ul id="cart-items">
+            <% if (articles.length > 0) { %>
+                <% articles.forEach(article => { %>
+                    <li>
+                        <div class="cart-item">
+                            <div class="cart-item-info">
+                                <strong><%= article.article %></strong>
+                                <p>Quantité: <%= article.qteArticle %> skittle(s)</p>
+                                <p>Intensité: <%= article.intensite %> mg</p>
+                                <p>Description: <%= article.description %></p>
+                                <p>Prix: <%= article.prix %> €</p>
+                            </div>
+                            <form action="/articles/supprimer/<%= article._id %>" method="POST" class="cart-item-remove">
+                                <button type="submit">Supprimer cet article ☠️</button>
+                            </form>
+                        </div>
+                    </li>
+                <% }); %>
+                <li>
+                    <strong>Total: <%= typeof totalPrix !== 'undefined' ? totalPrix : 0 %> €</strong>
+                </li>
+            <% } else { %>
+                <li>Votre panier est vide.</li>
+            <% } %>
+        </ul>
+        <form action="/articles/videPannier" method="POST" class="empty-cart-form">
+            <button type="submit" id="empty-cart-button">Vider le panier</button>
+        </form>
+        <form action="/paiement" method="GET" class="validate-cart-form">
+            <button type="submit" id="validate-cart-button">Valider le panier</button>
+        </form>
+    </div>
+
+    <!-- Formulaire d'Ajout -->
+    <div class="specific-request">
+        <h2>Demande de Skittles spécifiques</h2>
+        <form action='/articles/ajout' method="POST">
+            <input type="text" name="article" placeholder="Article">
+            <input type="text" name="qteArticle" placeholder="Quantité de l'article (skittle(s))">
+            <input type="text" name="intensite" placeholder="Intensité (mg)">
+            <input type="text" name="description" placeholder="Description">
+            <br>
+            <button type="submit">Ajouter</button>
+        </form>
+    </div>
+    
+    <!-- Bulle de Chat -->
+    <div id="chat-bubble">
+        💬
+        <span id="unread-count" style="display: none;">0</span>
+    </div>
+
+    <!-- Chat -->
+    <div id="chat">
+        <ul id="messages"></ul>
+        <input id="messageInput" placeholder="Votre message..." autocomplete="off">
+        <button id="sendButton">Envoyer</button>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        var socket = io();
+        var messageInput = document.getElementById('messageInput');
+        var messages = document.getElementById('messages');
+        var sendButton = document.getElementById('sendButton');
+        var chatBubble = document.getElementById('chat-bubble');
+        var chat = document.getElementById('chat');
+        var cartCount = document.getElementById('cart-count');
+        var cartItems = document.getElementById('cart-items');
+        var unreadCount = document.getElementById('unread-count');
+        var unreadMessages = 0;
+        var emptyCartButton = document.getElementById('empty-cart-button');
+        var validateCartButton = document.getElementById('validate-cart-button');
+
+        chatBubble.addEventListener('click', function() {
+            chat.style.display = chat.style.display === 'none' ? 'block' : 'none';
+            if (chat.style.display === 'block') {
+                unreadMessages = 0;
+                unreadCount.style.display = 'none';
+            }
+        });
+
+        sendButton.addEventListener('click', function() {
+            var msg = messageInput.value;
+            socket.emit('message', msg);
+            messageInput.value = '';
+        });
+
+        messageInput.addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                sendButton.click();
+            }
+        });
+
+        socket.on('message', function(msg) {
+            var li = document.createElement('li');
+            li.textContent = msg;
+            messages.appendChild(li);
+            if (chat.style.display === 'none') {
+                unreadMessages++;
+                unreadCount.textContent = unreadMessages;
+                unreadCount.style.display = 'inline';
+            }
+            messages.scrollTop = messages.scrollHeight; // Scroll vers le bas
+        });
+
+        function toggleCart() {
+            var cart = document.getElementById('cart');
+            cart.style.display = cart.style.display === 'none' ? 'block' : 'none';
+        }
+
+        function updateCartCount() {
+            var itemCount = cartItems.getElementsByTagName('li').length - 1;
+            if (itemCount > 0) {
+                cartCount.style.display = 'inline';
+                cartCount.textContent = itemCount;
+                emptyCartButton.style.display = 'inline';
+                validateCartButton.style.display = 'inline';
+            } else {
+                cartCount.style.display = 'none';
+                emptyCartButton.style.display = 'none';
+                validateCartButton.style.display = 'none';
+            }
+        }
+
+        // Initial update of the cart count
+        updateCartCount();
+    </script>
+
+</body>
+</html>

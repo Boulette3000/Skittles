@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Récapitulatif de commande</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+
+    <h1>Récapitulatif de commande</h1>
+    <p>Merci pour votre commande !</p>
+    <p>Votre numéro de suivi est : <strong><%= trackingNumber %></strong></p>
+
+    <h2>Articles commandés :</h2>
+    <ul>
+        <% articles.forEach(article => { %>
+            <li>
+                <strong><%= article.article %></strong> 
+                - Quantité : <%= article.qteArticle %> 
+                - Intensité : <%= article.intensite %> 
+                - Description : <%= article.description %>
+                - Prix : <%= article.prix.toFixed(2) %> €
+            </li>
+        <% }); %>
+    </ul>
+    
+    <!-- Ajouter le prix total -->
+    <p>Prix total : <%= articles.reduce((sum, article) => sum + article.prix, 0).toFixed(2) %> €</p>
+
+    <form action="/viderPanierEtRetour" method="POST">
+        <button type="submit">Retour à la page d'accueil</button>
+    </form>
+
+</body>
+</html>
