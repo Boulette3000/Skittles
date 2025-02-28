@@ -1,282 +1,313 @@
-/* General styles */
+/* General styles - Styles généraux pour l'ensemble du site */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #d4d4d3;
-    margin: 0;
-    padding: 0;
+    font-family: Arial, sans-serif; /* Police standard sans empattement pour une meilleure lisibilité */
+    background-color: #d4d4d3; /* Couleur de fond gris clair neutre pour tout le site */
+    margin: 0; /* Suppression des marges par défaut du navigateur */
+    padding: 0; /* Suppression des rembourrages par défaut du navigateur */
 }
 
 h1 {
-    text-align: center;
-    color: #333;
-    margin-top: 20px;
+    text-align: center; /* Centrage du titre principal */
+    color: #333; /* Couleur gris foncé pour un bon contraste sans être trop agressif */
+    margin-top: 20px; /* Espace au-dessus du titre */
 }
 
+/* Styles des formulaires - aspect visuel cohérent pour tous les formulaires */
 form {
-    background: #fff;
-    padding: 20px;
-    margin: 20px auto;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 80%;
-    max-width: 600px;
+    background: #fff; /* Fond blanc pour contraster avec le fond gris de la page */
+    padding: 20px; /* Espace intérieur pour éviter que le contenu ne touche les bords */
+    margin: 20px auto; /* Centrage horizontal avec espace vertical */
+    border-radius: 5px; /* Coins arrondis pour un design moderne */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Ombre légère pour effet de profondeur */
+    width: 80%; /* Largeur relative pour la responsivité */
+    max-width: 600px; /* Largeur maximale pour éviter l'étirement sur grands écrans */
 }
 
+/* Styles des champs de formulaire pour une apparence uniforme */
 form input[type="text"],
 form textarea,
 form select {
-    width: calc(100% - 22px);
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    width: calc(100% - 22px); /* Largeur totale moins padding et bordure pour éviter le débordement */
+    padding: 10px; /* Espace intérieur confortable pour la saisie */
+    margin: 10px 0; /* Espacement vertical entre les champs */
+    border: 1px solid #ccc; /* Bordure légère pour délimiter les champs */
+    border-radius: 5px; /* Coins arrondis cohérents avec le design */
 }
 
+/* Style des boutons de formulaire */
 form button {
-    background: #333;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+    background: #333; /* Fond gris foncé pour contraster avec le formulaire blanc */
+    color: #fff; /* Texte blanc pour la lisibilité sur fond sombre */
+    padding: 10px 20px; /* Espace intérieur pour un bouton confortable */
+    border: none; /* Suppression de la bordure par défaut */
+    border-radius: 5px; /* Coins arrondis cohérents */
+    cursor: pointer; /* Curseur main au survol pour indiquer qu'il est cliquable */
 }
 
+/* Animation de survol pour les boutons */
 form button:hover {
-    background: #555;
+    background: #555; /* Gris légèrement plus clair au survol pour l'effet visuel */
 }
 
+/* Style des listes non ordonnées */
 ul {
-    list-style: none;
-    padding: 0;
+    list-style: none; /* Suppression des puces par défaut */
+    padding: 0; /* Suppression du padding par défaut des listes */
 }
 
+/* Style de chaque élément de liste */
 ul li {
-    background: #fff;
-    padding: 20px;
-    margin: 20px auto;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 80%;
-    max-width: 600px;
+    background: #fff; /* Fond blanc comme les formulaires */
+    padding: 20px; /* Espace intérieur généreux */
+    margin: 20px auto; /* Centrage horizontal avec espace vertical */
+    border-radius: 5px; /* Coins arrondis cohérents */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Ombre légère identique aux formulaires */
+    width: 80%; /* Largeur relative pour la responsivité */
+    max-width: 600px; /* Largeur maximale cohérente avec les formulaires */
 }
 
+/* Style des tableaux dans les éléments de liste */
 ul li table {
-    width: 100%;
+    width: 100%; /* Utilisation de toute la largeur disponible */
 }
 
+/* Style des cellules de tableau */
 ul li table td {
-    padding: 5px 0;
+    padding: 5px 0; /* Espacement vertical uniquement */
 }
 
+/* Style des formulaires à l'intérieur des éléments de liste */
 ul li form {
-    margin-top: 10px;
+    margin-top: 10px; /* Espace au-dessus du formulaire */
 }
 
+/* Style spécifique pour les boutons dans les listes (probablement des boutons de suppression) */
 ul li form button {
-    background: #e74c3c;
+    background: #e74c3c; /* Rouge pour indiquer une action de suppression */
 }
 
+/* Animation de survol pour ces boutons */
 ul li form button:hover {
-    background: #c0392b;
+    background: #c0392b; /* Rouge plus foncé au survol */
 }
 
-/* Cart styles */
+/* Styles du panier - Cart styles */
+/* Icône du panier fixée en haut à droite de l'écran */
 #cart-icon {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    background: #333;
-    color: #fff;
-    padding: 10px;
-    border-radius: 50%;
-    cursor: pointer;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    display: flex;
-    align-items: center;
+    position: fixed; /* Position fixe pour rester visible lors du défilement */
+    top: 20px; /* Distance du haut */
+    right: 20px; /* Distance de la droite */
+    background: #333; /* Fond gris foncé cohérent avec les boutons */
+    color: #fff; /* Texte blanc pour la lisibilité */
+    padding: 10px; /* Espace intérieur */
+    border-radius: 50%; /* Forme circulaire */
+    cursor: pointer; /* Curseur main pour indiquer qu'il est cliquable */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Ombre légère */
+    display: flex; /* Flexbox pour aligner le compteur */
+    align-items: center; /* Alignement vertical centré */
 }
 
+/* Compteur d'articles dans le panier */
 #cart-count {
-    background: red;
-    color: white;
-    border-radius: 50%;
-    padding: 2px 6px;
-    margin-left: 5px;
-    font-size: 12px;
+    background: red; /* Fond rouge pour attirer l'attention */
+    color: white; /* Texte blanc pour la lisibilité */
+    border-radius: 50%; /* Forme circulaire */
+    padding: 2px 6px; /* Espace intérieur compact */
+    margin-left: 5px; /* Espace à gauche pour séparer de l'icône */
+    font-size: 12px; /* Taille de police réduite */
 }
 
+/* Conteneur du panier qui s'affiche au clic */
 #cart {
-    display: none;
-    position: fixed;
-    top: 60px;
-    right: 20px;
-    background: #fff;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 350px;
-    max-height: 400px;
-    overflow-y: auto;
+    display: none; /* Caché par défaut, probablement affiché via JavaScript */
+    position: fixed; /* Position fixe pour rester en place lors du défilement */
+    top: 60px; /* Position sous l'icône du panier */
+    right: 20px; /* Aligné avec l'icône à droite */
+    background: #fff; /* Fond blanc cohérent avec les autres éléments */
+    padding: 20px; /* Espace intérieur */
+    border-radius: 5px; /* Coins arrondis cohérents */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Ombre légère */
+    width: 350px; /* Largeur fixe pour le panier */
+    max-height: 400px; /* Hauteur maximale pour éviter de prendre trop d'espace */
+    overflow-y: auto; /* Barre de défilement vertical si nécessaire */
 }
 
+/* Titre du panier */
 #cart h2 {
-    margin-top: 0;
-    font-size: 18px;
-    color: #333;
+    margin-top: 0; /* Suppression de la marge supérieure pour coller au haut */
+    font-size: 18px; /* Taille de police réduite pour un titre de panneau */
+    color: #333; /* Couleur gris foncé cohérente */
 }
 
+/* Liste des articles dans le panier */
 #cart ul {
-    list-style: none;
-    padding: 0;
+    list-style: none; /* Suppression des puces */
+    padding: 0; /* Suppression du padding par défaut */
 }
 
+/* Éléments de la liste du panier */
 #cart ul li {
-    padding: 10px;
-    border-bottom: 1px solid #ccc;
+    padding: 10px; /* Espace intérieur réduit par rapport aux autres listes */
+    border-bottom: 1px solid #ccc; /* Séparateur entre les articles */
 }
 
-/* Cart item styles */
+/* Styles des articles du panier */
 .cart-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    display: flex; /* Disposition en flexbox pour placer les éléments côte à côte */
+    justify-content: space-between; /* Espacement maximal entre infos et bouton de suppression */
+    align-items: center; /* Alignement vertical centré */
 }
 
+/* Informations de l'article dans le panier */
 .cart-item-info {
-    flex-grow: 1;
+    flex-grow: 1; /* Prend tout l'espace disponible */
 }
 
+/* Bouton de suppression d'article */
 .cart-item-remove {
-    margin-left: 10px;
+    margin-left: 10px; /* Espace à gauche pour séparer des informations */
 }
 
-/* Cart buttons */
+/* Boutons du panier */
 .empty-cart-form,
 .validate-cart-form {
-    margin-top: 10px;
-    text-align: center;
+    margin-top: 10px; /* Espace au-dessus des boutons */
+    text-align: center; /* Centrage horizontal */
 }
 
+/* Bouton de validation du panier (vert pour action positive) */
 .validate-cart-form button {
-    background: #28a745;
+    background: #28a745; /* Vert pour indiquer une action de validation */
 }
 
+/* Animation de survol pour le bouton de validation */
 .validate-cart-form button:hover {
-    background: #218838;
+    background: #218838; /* Vert plus foncé au survol */
 }
 
-/* Predefined articles */
+/* Section des articles prédéfinis */
 .predefined-articles {
-    display: flex;
-    justify-content: space-around;
-    margin: 20px auto;
-    width: 80%;
-    max-width: 800px;
+    display: flex; /* Disposition en flexbox pour aligner horizontalement */
+    justify-content: space-around; /* Espacement égal entre les éléments */
+    margin: 20px auto; /* Centrage horizontal avec espace vertical */
+    width: 80%; /* Largeur relative pour la responsivité */
+    max-width: 800px; /* Largeur maximale plus grande que les formulaires */
 }
 
+/* Formulaire pour chaque article prédéfini */
 .predefined-article-form {
-    background: #fff;
-    padding: 20px;
-    margin: 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 30%;
+    background: #fff; /* Fond blanc cohérent */
+    padding: 20px; /* Espace intérieur */
+    margin: 20px; /* Espace extérieur */
+    border-radius: 5px; /* Coins arrondis cohérents */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Ombre légère */
+    display: flex; /* Disposition en flexbox */
+    flex-direction: column; /* Empilement vertical des éléments */
+    align-items: center; /* Centrage horizontal des éléments */
+    width: 30%; /* Largeur relative pour 3 éléments par ligne */
 }
 
+/* Images des articles prédéfinis */
 .predefined-article-form img {
-    width: 100px;
-    height: 100px;
-    object-fit: cover;
-    margin-bottom: 10px;
+    width: 100px; /* Largeur fixe */
+    height: 100px; /* Hauteur fixe pour forme carrée */
+    object-fit: cover; /* Redimensionnement intelligent pour remplir l'espace */
+    margin-bottom: 10px; /* Espace sous l'image */
 }
 
+/* Boutons des articles prédéfinis */
 .predefined-article-form button {
-    margin-bottom: 10px;
+    margin-bottom: 10px; /* Espace sous les boutons */
 }
 
-/* Chat styles */
+/* Styles du chat */
+/* Bulle de chat fixée en bas à droite */
 #chat-bubble {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background: #333;
-    color: #fff;
-    padding: 15px;
-    border-radius: 50%;
-    cursor: pointer;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    display: flex;
-    align-items: center;
+    position: fixed; /* Position fixe pour rester visible */
+    bottom: 20px; /* Distance du bas */
+    right: 20px; /* Distance de la droite */
+    background: #333; /* Fond gris foncé cohérent */
+    color: #fff; /* Texte blanc pour lisibilité */
+    padding: 15px; /* Espace intérieur légèrement plus grand que l'icône du panier */
+    border-radius: 50%; /* Forme circulaire */
+    cursor: pointer; /* Curseur main pour indiquer qu'il est cliquable */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Ombre légère */
+    display: flex; /* Flexbox pour aligner le compteur */
+    align-items: center; /* Alignement vertical centré */
 }
 
+/* Compteur de messages non lus */
 #unread-count {
-    background: red;
-    color: white;
-    border-radius: 50%;
-    padding: 2px 6px;
-    margin-left: 5px;
-    font-size: 12px;
+    background: red; /* Fond rouge pour attirer l'attention */
+    color: white; /* Texte blanc pour la lisibilité */
+    border-radius: 50%; /* Forme circulaire */
+    padding: 2px 6px; /* Espace intérieur compact */
+    margin-left: 5px; /* Espace à gauche pour séparer de l'icône */
+    font-size: 12px; /* Taille de police réduite */
 }
 
+/* Fenêtre de chat */
 #chat {
-    display: none;
-    position: fixed;
-    bottom: 80px;
-    right: 20px;
-    background: #fff;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 300px;
-    max-height: 400px;
-    overflow-y: auto;
+    display: none; /* Caché par défaut */
+    position: fixed; /* Position fixe */
+    bottom: 80px; /* Position au-dessus de la bulle de chat */
+    right: 20px; /* Aligné avec la bulle à droite */
+    background: #fff; /* Fond blanc cohérent */
+    padding: 20px; /* Espace intérieur */
+    border-radius: 5px; /* Coins arrondis */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Ombre légère */
+    width: 300px; /* Largeur fixe */
+    max-height: 400px; /* Hauteur maximale */
+    overflow-y: auto; /* Barre de défilement vertical si nécessaire */
 }
 
+/* Liste des messages du chat */
 #chat ul {
-    list-style: none;
-    padding: 0;
-    max-height: 200px;
-    overflow-y: auto;
+    list-style: none; /* Suppression des puces */
+    padding: 0; /* Suppression du padding par défaut */
+    max-height: 200px; /* Hauteur maximale limitée */
+    overflow-y: auto; /* Barre de défilement vertical si nécessaire */
 }
 
+/* Messages individuels */
 #chat ul li {
-    padding: 10px;
-    border-bottom: 1px solid #ccc;
+    padding: 10px; /* Espace intérieur */
+    border-bottom: 1px solid #ccc; /* Séparateur entre les messages */
 }
 
+/* Champ de saisie et bouton du chat */
 #chat input,
 #chat button {
-    width: calc(100% - 22px);
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    width: calc(100% - 22px); /* Largeur totale moins padding et bordure */
+    padding: 10px; /* Espace intérieur */
+    margin: 10px 0; /* Espacement vertical */
+    border: 1px solid #ccc; /* Bordure légère */
+    border-radius: 5px; /* Coins arrondis */
 }
 
-/* Specific request styles */
+/* Styles pour demandes spécifiques */
 .specific-request {
-    background: #fff;
-    padding: 20px;
-    margin: 20px auto;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 80%;
-    max-width: 600px;
+    background: #fff; /* Fond blanc cohérent */
+    padding: 20px; /* Espace intérieur */
+    margin: 20px auto; /* Centrage horizontal avec espace vertical */
+    border-radius: 5px; /* Coins arrondis */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Ombre légère */
+    width: 80%; /* Largeur relative */
+    max-width: 600px; /* Largeur maximale cohérente */
 }
 
+/* Titre de section demande spécifique */
 .specific-request h2 {
-    text-align: center;
-    margin-bottom: 20px;
+    text-align: center; /* Centrage du titre */
+    margin-bottom: 20px; /* Espace sous le titre */
 }
 
-/* Footer */
+/* Pied de page */
 footer {
-    background: #333;
-    color: #fff;
-    text-align: center;
-    padding: 20px;
-    margin-top: 20px;
-    border-top: #77aaff 3px solid;
+    background: #333; /* Fond gris foncé */
+    color: #fff; /* Texte blanc */
+    text-align: center; /* Centrage du texte */
+    padding: 20px; /* Espace intérieur */
+    margin-top: 20px; /* Espace au-dessus du footer */
+    border-top: #77aaff 3px solid; /* Bordure bleue décorative en haut */
 }

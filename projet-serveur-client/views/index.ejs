@@ -1,32 +1,40 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MySkittles</title>
-    <link rel="icon" href="/Girafe.png" type="image/png">
-    <link rel="stylesheet" href="/styles.css">
+    <!-- Métadonnées de base pour le document -->
+    <meta charset="UTF-8"> <!-- Définit l'encodage des caractères (important pour les accents en français) -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Assure la réactivité sur appareils mobiles -->
+    <title>MySkittles</title> <!-- Titre de la page affiché dans l'onglet du navigateur -->
+    <link rel="icon" href="/Girafe.png" type="image/png"> <!-- Favicon (icône affichée dans l'onglet) -->
+    <link rel="stylesheet" href="/styles.css"> <!-- Liaison avec la feuille de style CSS externe -->
 </head>
 <body>
-
+    <!-- Titre principal de la page -->
     <h1>Bienvenue sur notre boutique MySkittles, 100 % sécurisé, 100 % qualité</h1>
 
-    <!-- Boutons pour ajouter des articles prédéfinis -->
+    <!-- Section des articles prédéfinis avec des formulaires pour chaque type de Skittle -->
     <div class="predefined-articles">
+        <!-- Formulaire pour les Skittles rouges -->
         <form action="/init/red" method="POST" class="predefined-article-form test">
+            <!-- Image représentant le produit -->
             <img src="/rouge.png" alt="Skittle rouge">
+            <!-- Bouton de soumission du formulaire -->
             <button type="submit">Ajouter Skittle rouge</button>
+            <!-- Menu déroulant pour choisir la quantité -->
             <select name="qteArticle">
                 <option value="5">5 skittles</option>
                 <option value="10">10 skittles</option>
                 <option value="15">15 skittles</option>
             </select>
+            <!-- Menu déroulant pour choisir l'intensité -->
             <select name="intensite">
                 <option value="1">1 mg</option>
                 <option value="3">3 mg</option>
                 <option value="5">5 mg</option>
             </select>
         </form>
+        
+        <!-- Formulaire pour les Skittles verts (structure identique au précédent) -->
         <form action="/init/green" method="POST" class="predefined-article-form test">
             <img src="/vert.png" alt="Skittle vert">
             <button type="submit">Ajouter Skittle vert</button>
@@ -41,6 +49,8 @@
                 <option value="5">5 mg</option>
             </select>
         </form>
+        
+        <!-- Formulaire pour les Skittles violets (structure identique aux précédents) -->
         <form action="/init/purple" method="POST" class="predefined-article-form test">
             <img src="/violet.png" alt="Skittle violet">
             <button type="submit">Ajouter Skittle violet</button>
@@ -57,50 +67,61 @@
         </form>
     </div>
 
-    <!-- Panier en haut à droite -->
+    <!-- Icône du panier en haut à droite avec compteur d'articles -->
     <div id="cart-icon" onclick="toggleCart()">
-        🛒
-        <span id="cart-count" style="display: none;">0</span>
+        🛒 <!-- Emoji panier -->
+        <span id="cart-count" style="display: none;">0</span> <!-- Compteur d'articles (caché par défaut) -->
     </div>
+    
+    <!-- Le panier lui-même (contenu) -->
     <div id="cart">
         <h2>Panier</h2>
         <ul id="cart-items">
-            <% if (articles.length > 0) { %>
+            <!-- Logique conditionnelle EJS pour afficher le contenu du panier -->
+            <% if (articles.length > 0) { %> <!-- Vérifie si le panier contient des articles -->
+                <!-- Boucle sur chaque article du panier -->
                 <% articles.forEach(article => { %>
                     <li>
                         <div class="cart-item">
                             <div class="cart-item-info">
+                                <!-- Affichage des détails de l'article avec les variables EJS -->
                                 <strong><%= article.article %></strong>
                                 <p>Quantité: <%= article.qteArticle %> skittle(s)</p>
                                 <p>Intensité: <%= article.intensite %> mg</p>
                                 <p>Description: <%= article.description %></p>
                                 <p>Prix: <%= article.prix %> €</p>
                             </div>
+                            <!-- Formulaire pour supprimer un article spécifique du panier -->
                             <form action="/articles/supprimer/<%= article._id %>" method="POST" class="cart-item-remove">
                                 <button type="submit">Supprimer cet article ☠️</button>
                             </form>
                         </div>
                     </li>
                 <% }); %>
+                <!-- Affichage du prix total du panier -->
                 <li>
                     <strong>Total: <%= typeof totalPrix !== 'undefined' ? totalPrix : 0 %> €</strong>
                 </li>
             <% } else { %>
+                <!-- Message affiché si le panier est vide -->
                 <li>Votre panier est vide.</li>
             <% } %>
         </ul>
+        <!-- Formulaire pour vider entièrement le panier -->
         <form action="/articles/videPannier" method="POST" class="empty-cart-form">
             <button type="submit" id="empty-cart-button">Vider le panier</button>
         </form>
+        <!-- Formulaire pour passer à la phase de paiement -->
         <form action="/paiement" method="GET" class="validate-cart-form">
             <button type="submit" id="validate-cart-button">Valider le panier</button>
         </form>
     </div>
 
-    <!-- Formulaire d'Ajout -->
+    <!-- Section pour les demandes spécifiques/personnalisées -->
     <div class="specific-request">
         <h2>Demande de Skittles spécifiques</h2>
         <form action='/articles/ajout' method="POST">
+            <!-- Champs de saisie pour les informations personnalisées -->
             <input type="text" name="article" placeholder="Article">
             <input type="text" name="qteArticle" placeholder="Quantité de l'article (skittle(s))">
             <input type="text" name="intensite" placeholder="Intensité (mg)">
@@ -110,22 +131,28 @@
         </form>
     </div>
     
-    <!-- Bulle de Chat -->
+    <!-- Icône pour accéder au chat en bas de page -->
     <div id="chat-bubble">
-        💬
-        <span id="unread-count" style="display: none;">0</span>
+        💬 <!-- Emoji bulle de discussion -->
+        <span id="unread-count" style="display: none;">0</span> <!-- Compteur de messages non lus (caché par défaut) -->
     </div>
 
-    <!-- Chat -->
+    <!-- Interface de chat -->
     <div id="chat">
-        <ul id="messages"></ul>
-        <input id="messageInput" placeholder="Votre message..." autocomplete="off">
-        <button id="sendButton">Envoyer</button>
+        <ul id="messages"></ul> <!-- Liste des messages -->
+        <input id="messageInput" placeholder="Votre message..." autocomplete="off"> <!-- Champ de saisie du message -->
+        <button id="sendButton">Envoyer</button> <!-- Bouton d'envoi -->
     </div>
 
+    <!-- Importation de la bibliothèque Socket.io (fournie par le serveur) -->
     <script src="/socket.io/socket.io.js"></script>
+    
+    <!-- Script JavaScript pour la gestion dynamique de la page -->
     <script>
+        // Initialisation de la connexion Socket.io
         var socket = io();
+        
+        // Récupération des éléments du DOM pour manipulation ultérieure
         var messageInput = document.getElementById('messageInput');
         var messages = document.getElementById('messages');
         var sendButton = document.getElementById('sendButton');
@@ -134,63 +161,80 @@
         var cartCount = document.getElementById('cart-count');
         var cartItems = document.getElementById('cart-items');
         var unreadCount = document.getElementById('unread-count');
-        var unreadMessages = 0;
+        var unreadMessages = 0; // Compteur des messages non lus
         var emptyCartButton = document.getElementById('empty-cart-button');
         var validateCartButton = document.getElementById('validate-cart-button');
 
+        // Gestion du clic sur la bulle de chat pour afficher/masquer le chat
         chatBubble.addEventListener('click', function() {
+            // Bascule l'affichage du chat
             chat.style.display = chat.style.display === 'none' ? 'block' : 'none';
+            // Si le chat est affiché, réinitialise le compteur de messages non lus
             if (chat.style.display === 'block') {
                 unreadMessages = 0;
                 unreadCount.style.display = 'none';
             }
         });
 
+        // Gestion du clic sur le bouton d'envoi de message
         sendButton.addEventListener('click', function() {
             var msg = messageInput.value;
-            socket.emit('message', msg);
-            messageInput.value = '';
+            socket.emit('message', msg); // Envoi du message au serveur via Socket.io
+            messageInput.value = ''; // Effacement du champ après envoi
         });
 
+        // Envoi du message en appuyant sur la touche Entrée
         messageInput.addEventListener('keypress', function(event) {
             if (event.key === 'Enter') {
-                event.preventDefault();
-                sendButton.click();
+                event.preventDefault(); // Empêche le comportement par défaut (nouvelle ligne)
+                sendButton.click(); // Déclenche le clic sur le bouton d'envoi
             }
         });
 
+        // Gestion de la réception d'un message du serveur
         socket.on('message', function(msg) {
+            // Création d'un nouvel élément de liste pour le message
             var li = document.createElement('li');
             li.textContent = msg;
             messages.appendChild(li);
+            
+            // Si le chat est masqué, incrémente le compteur de messages non lus
             if (chat.style.display === 'none') {
                 unreadMessages++;
                 unreadCount.textContent = unreadMessages;
                 unreadCount.style.display = 'inline';
             }
-            messages.scrollTop = messages.scrollHeight; // Scroll vers le bas
+            
+            // Défilement automatique vers le bas pour voir les nouveaux messages
+            messages.scrollTop = messages.scrollHeight;
         });
 
+        // Fonction pour afficher/masquer le panier au clic sur l'icône
         function toggleCart() {
             var cart = document.getElementById('cart');
             cart.style.display = cart.style.display === 'none' ? 'block' : 'none';
         }
 
+        // Fonction pour mettre à jour le compteur d'articles du panier
         function updateCartCount() {
+            // Calcule le nombre d'articles (moins 1 pour ne pas compter l'élément du total)
             var itemCount = cartItems.getElementsByTagName('li').length - 1;
+            
             if (itemCount > 0) {
+                // Affiche le compteur, met à jour sa valeur et affiche les boutons
                 cartCount.style.display = 'inline';
                 cartCount.textContent = itemCount;
                 emptyCartButton.style.display = 'inline';
                 validateCartButton.style.display = 'inline';
             } else {
+                // Masque le compteur et les boutons si le panier est vide
                 cartCount.style.display = 'none';
                 emptyCartButton.style.display = 'none';
                 validateCartButton.style.display = 'none';
             }
         }
 
-        // Initial update of the cart count
+        // Mise à jour initiale du compteur du panier au chargement de la page
         updateCartCount();
     </script>
 

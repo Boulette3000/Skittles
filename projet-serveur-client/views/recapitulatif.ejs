@@ -1,34 +1,60 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+    <!-- Définition de l'encodage UTF-8 pour supporter les caractères spéciaux et accents en français -->
     <meta charset="UTF-8">
+    <!-- Configuration de la vue pour l'adapter aux appareils mobiles - crucial pour le responsive design -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Titre de la page qui s'affichera dans l'onglet du navigateur -->
     <title>Récapitulatif de commande</title>
+    <!-- Importation du fichier CSS externe pour styliser la page -->
     <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-
+    <!-- Titre principal de la page -->
     <h1>Récapitulatif de commande</h1>
+    <!-- Message de confirmation pour l'utilisateur -->
     <p>Merci pour votre commande !</p>
+    <!-- Affichage du numéro de suivi en utilisant une expression EJS pour insérer une variable dynamique -->
     <p>Votre numéro de suivi est : <strong><%= trackingNumber %></strong></p>
 
+    <!-- Sous-titre pour la liste des articles -->
     <h2>Articles commandés :</h2>
+    <!-- Liste non ordonnée qui contiendra les articles -->
     <ul>
+        <!-- Début du bloc EJS pour itérer sur le tableau 'articles' -->
         <% articles.forEach(article => { %>
+            <!-- Création d'un élément de liste pour chaque article -->
             <li>
+                <!-- Nom de l'article mis en gras pour une meilleure lisibilité -->
                 <strong><%= article.article %></strong> 
+                <!-- Affichage des différentes propriétés de l'article avec des séparateurs pour plus de clarté -->
                 - Quantité : <%= article.qteArticle %> 
                 - Intensité : <%= article.intensite %> 
                 - Description : <%= article.description %>
+                <!-- Formatage du prix avec 2 décimales grâce à la méthode toFixed(2) -->
                 - Prix : <%= article.prix.toFixed(2) %> €
             </li>
+        <!-- Fin du bloc EJS forEach -->
         <% }); %>
     </ul>
     
-    <!-- Ajouter le prix total -->
+    <!-- 
+    Calcul et affichage du prix total
+    La méthode reduce() est utilisée pour sommer les prix de tous les articles :
+    - sum : accumulateur qui stocke la somme en cours
+    - article : élément actuel du tableau
+    - 0 : valeur initiale de l'accumulateur
+    -->
     <p>Prix total : <%= articles.reduce((sum, article) => sum + article.prix, 0).toFixed(2) %> €</p>
 
+    <!-- 
+    Formulaire pour retourner à la page d'accueil
+    La méthode POST est utilisée pour envoyer les données de façon sécurisée
+    L'action spécifie la route qui sera appelée lors de la soumission
+    -->
     <form action="/viderPanierEtRetour" method="POST">
+        <!-- Bouton qui soumet le formulaire et vide probablement le panier côté serveur -->
         <button type="submit">Retour à la page d'accueil</button>
     </form>
 
